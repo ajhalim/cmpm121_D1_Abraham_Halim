@@ -2,7 +2,7 @@ import "./style.css";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
-const gameName = "Abe Game";
+const gameName = "Necromancer sim";
 
 document.title = gameName;
 
@@ -16,11 +16,11 @@ app.append(header);
 
 let count: number = 0;
 const countDisplay: HTMLDivElement = document.createElement("div");
-countDisplay.innerText = `You have summoned ${count} bones!`;
+countDisplay.innerText = `You have summoned ${count} skeletons!`;
 
 button.addEventListener("click", () => {
   count++;
-  countDisplay.innerText = `You have summoned ${count} bones!!`;
+  countDisplay.innerText = `You have summoned ${count} skeletons`;
 });
 
 app.append(header, button, countDisplay);
