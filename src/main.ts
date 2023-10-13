@@ -15,19 +15,33 @@ button.textContent = "☠";
 app.append(header);
 
 let count: number = 0;
+let startTime:number = performance.now();
+
 const countDisplay: HTMLDivElement = document.createElement("div");
 countDisplay.innerText = `You have summoned ${count} skeletons!`;
 
-setInterval(() => {
-    count++;
-    countDisplay.innerText = `You have summoned ${count} skeletons`;}, 
-    1000
-    );
 
+function countUpdate(currUpdate: number){
+    if(startTime == undefined){
+        startTime = currUpdate;
+    }
+    const duration = currUpdate - startTime;
+
+    count = Math.floor((duration/1000) * 1 + clicks);
+    requestAnimationFrame(countUpdate);
+
+    countDisplay.innerText = `You have summoned ${count} skeletons`;
+}
+
+let clicks: number = 0; 
 button.addEventListener("click", () => {
-  count++;
-  countDisplay.innerText = `You have summoned ${count} skeletons`;
+  clicks++;
+  countUpdate(performance.now());
 });
+
+
+
+requestAnimationFrame(countUpdate);
 
 
 app.append(header, button, countDisplay);
