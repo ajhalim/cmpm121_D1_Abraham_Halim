@@ -18,9 +18,16 @@ let count: number = 0;
 const countDisplay: HTMLDivElement = document.createElement("div");
 countDisplay.innerText = `You have summoned ${count} skeletons!`;
 
+setInterval(() => {
+    count++;
+    countDisplay.innerText = `You have summoned ${count} skeletons`;}, 
+    1000
+    );
+
 button.addEventListener("click", () => {
   count++;
   countDisplay.innerText = `You have summoned ${count} skeletons`;
 });
+
 
 app.append(header, button, countDisplay);
