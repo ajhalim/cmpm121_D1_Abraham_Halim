@@ -32,14 +32,14 @@ const countDisplay: HTMLDivElement = document.createElement("div");
 countDisplay.innerText = `You have summoned ${count} skeletons!`;
 
 
-let clicks: number = 0; 
+/* let clicks: number = 0; 
 button.addEventListener("click", () => {
   count++;
   frameUpdate(performance.now());
-});
+}); */
 
 upgrade1.addEventListener("click", () => {
-    growthRate++;
+    growthRate = growthRate + .1;
     //countUpdate(performance.now());
     count = count -10;
   });
@@ -66,7 +66,7 @@ function frameUpdate(currUpdate: number){
     count += (((duration/1000)) * growthRate);
     requestAnimationFrame(frameUpdate);
 
-    countDisplay.innerText = `You have summoned ${count.toFixed()} skeletons and have a growth rate of ${growthRate.toFixed()}`;
+    countDisplay.innerText = `You have summoned ${count.toFixed()} skeletons and have a growth rate of ${growthRate.toFixed(2)}`;
 }
 
 
