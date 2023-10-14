@@ -1,5 +1,5 @@
 import "./style.css";
-//testing
+//testingdsadsad
 const app: HTMLDivElement = document.querySelector("#app")!;
 
 const gameName = "My game";
