@@ -8,5 +8,4 @@ var header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
-let count: number = 0;
-const countDisplay = HTMLDivElement = document.createElement("div");
+
