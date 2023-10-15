@@ -4,6 +4,11 @@ let upgrade1Count: number = 0;
 let upgrade2Count: number = 0;
 let upgrade3Count: number = 0;
 
+let upgrade1Cost: number = 10;
+let upgrade2Cost: number = 100;
+let upgrade3Cost: number = 1000;
+
+
 const app: HTMLDivElement = document.querySelector("#app")!;
 
 const gameName = "Necromancer sim";
@@ -48,7 +53,64 @@ let count: number = 0;
 let growthRate: number = 0;
 let prevTime:number = 0;
 
+interface things{
+    name: string;
+    cost: number;
+    amountOwned: number;
+    growthRate: number;
+    button: HTMLButtonElement;
+    description: string;
+}
 
+const upgrades: things[] = [
+    {
+        name:"🧙",
+        cost: 10,
+        amountOwned: 0,
+        growthRate: 0.1,
+        button: document.createElement("button"),
+        description:"hire apprentice to do wizard stuff",
+    },
+
+    {
+        name:"🔮",
+        cost: 100,
+        amountOwned: 0,
+        growthRate: 2,
+        button: document.createElement("button"),
+        description:"obtain magic orb to help with wizard stuff",
+    },
+
+    {
+        name:"🏰",
+        cost: 1000,
+        amountOwned: 0,
+        growthRate: 50,
+        button: document.createElement("button"),
+        description:"get a castle to do wizard stuff",
+    },
+
+
+
+]
+
+function createButtons(upgrades: things[]) {
+    for (let i: number = 0; i < upgrades.length; i++) {
+        upgrades[
+        i
+      ].button.innerHTML = `${upgrades[i].name}<br>Skele summons: ${upgrades[i].growthRate} : Cost: ${upgrades[i].cost}
+      <br>${upgrades[i].description}`;
+      upgrades[i].button.disabled = true;
+      app.append(upgrades[i].button);
+    }
+}
+
+function buyUpgrade(purchase: things){
+    count = count - purchase.cost;
+    countDisplay.innerText = `You have summoned ${count.toFixed()} skeletons and have a growth rate of ${growthRate.toFixed(2)}`;
+}
+
+  
 
 const countDisplay: HTMLDivElement = document.createElement("div");
 countDisplay.innerText = `You have summoned ${count} skeletons!`;
@@ -134,7 +196,5 @@ requestAnimationFrame(frameUpdate);
 app.append(header);
 app.append(button);
 app.append(divider);
-app.append(upgrade1);
-app.append(upgrade2);
-app.append(upgrade3);
+createButtons(upgrades);
 app.append(countDisplay);
