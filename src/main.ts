@@ -4,9 +4,9 @@ let upgrade1Count: number = 0;
 let upgrade2Count: number = 0;
 let upgrade3Count: number = 0;
 
-let upgrade1Cost: number = 10;
-let upgrade2Cost: number = 100;
-let upgrade3Cost: number = 1000;
+//let upgrade1Cost: number = 10;
+//let upgrade2Cost: number = 100;
+//let upgrade3Cost: number = 1000;
 
 
 const app: HTMLDivElement = document.querySelector("#app")!;
@@ -26,28 +26,24 @@ const divider = document.createElement("div");
 
 app.append(header);
 
-const upgrade1: HTMLButtonElement = document.createElement("button");
-
+/* const upgrade1: HTMLButtonElement = document.createElement("button");
 //upgrade1.textContent = "🧙";
-
 upgrade1.innerHTML = `🧙<br>hire apprentice<br>you own ${upgrade1Count}`;
 upgrade1.disabled = true;
 
 
-
 const upgrade2: HTMLButtonElement = document.createElement("button");
-
 //upgrade2.textContent = "🔮";
 upgrade2.innerHTML = `🔮<br>purchase orb<br>you own ${upgrade2Count}`;
 upgrade2.disabled = true;
 
 
-
 const upgrade3: HTMLButtonElement = document.createElement("button");
-
 //upgrade3.textContent = "🏰";
 upgrade3.innerHTML = `🏰<br>purchase castle<br>you own ${upgrade3Count}`;
-upgrade3.disabled = true;
+upgrade3.disabled = true; */
+
+
 
 let count: number = 0;
 let growthRate: number = 0;
@@ -62,7 +58,7 @@ interface things{
     description: string;
 }
 
-const upgrades: things[] = [
+const availableItems: things[] = [
     {
         name:"🧙",
         cost: 10,
@@ -94,26 +90,43 @@ const upgrades: things[] = [
 
 ]
 
-function createButtons(upgrades: things[]) {
-    for (let i: number = 0; i < upgrades.length; i++) {
-        upgrades[
-        i
-      ].button.innerHTML = `${upgrades[i].name}<br>Skele summons: ${upgrades[i].growthRate} : Cost: ${upgrades[i].cost}
-      <br>${upgrades[i].description}`;
-      upgrades[i].button.disabled = true;
-      app.append(upgrades[i].button);
+//const upgrade2: HTMLButtonElement = document.createElement("button")
+
+function createButtons(availableItems: things[]) {
+    for (let i: number = 0; i < availableItems.length; i++) {
+        availableItems[i].button.innerHTML = `${availableItems[i].name}<br>Skele summons: ${availableItems[i].growthRate} : Cost: ${availableItems[i].cost}
+      <br>${availableItems[i].description}`;
+      availableItems[i].button.disabled = true;
+      app.append(availableItems[i].button);
     }
 }
 
 function buyUpgrade(purchase: things){
+
     count = count - purchase.cost;
+
+    purchase.amountOwned++;
+
+    growthRate += purchase.growthRate;
+
+
     countDisplay.innerText = `You have summoned ${count.toFixed()} skeletons and have a growth rate of ${growthRate.toFixed(2)}`;
+}
+
+function disableCheck(availableItems: things[]){
+    for (let i: number = 0; i < availableItems.length; i++) {
+        if(availableItems[i].cost <= count){
+            availableItems[i].button.disabled = false;
+        }else{
+            availableItems[i].button.disabled = true;
+        }
+    }
 }
 
   
 
 const countDisplay: HTMLDivElement = document.createElement("div");
-countDisplay.innerText = `You have summoned ${count} skeletons!`;
+//countDisplay.innerText = `You have summoned ${count} skeletons!`;
 
 
 //let clicks: number = 0; 
@@ -122,7 +135,7 @@ button.addEventListener("click", () => {
   frameUpdate(performance.now());
 }); 
 
-upgrade1.addEventListener("click", () => {
+/* upgrade1.addEventListener("click", () => {
     growthRate = growthRate + .1;
     upgrade1Count++;
     //countUpdate(performance.now());
@@ -141,7 +154,7 @@ upgrade1.addEventListener("click", () => {
     upgrade3Count++;
     //countUpdate(performance.now());
     count = count -1000;
-  });
+  }); */
 
 
 
@@ -150,8 +163,10 @@ function frameUpdate(currUpdate: number){
         prevTime = currUpdate;
     }
 
+
+    disableCheck(availableItems);
     //disable check
-    if(count >= 10){
+    /* if(count >= 10){
         upgrade1.disabled = false;
     }else{
         upgrade1.disabled = true;
@@ -168,7 +183,7 @@ function frameUpdate(currUpdate: number){
         upgrade3.disabled = false;
     }else{
         upgrade3.disabled = true;
-    }
+    } */
 
     //time check
     const duration = currUpdate - prevTime;
@@ -179,15 +194,20 @@ function frameUpdate(currUpdate: number){
     requestAnimationFrame(frameUpdate);
 
     countDisplay.innerText = `You have summoned ${count.toFixed()} skeletons and have a growth rate of ${growthRate.toFixed(2)}`;
-    upgrade1.innerHTML = `🧙<br>hire apprentice<br>you own ${upgrade1Count}`;
+    
+    /*upgrade1.innerHTML = `🧙<br>hire apprentice<br>you own ${upgrade1Count}`;
     upgrade2.innerHTML = `🔮<br>purchase orb<br>you own ${upgrade2Count}`;
-    upgrade3.innerHTML = `🏰<br>purchase castle<br>you own ${upgrade3Count}`;
+    upgrade3.innerHTML = `🏰<br>purchase castle<br>you own ${upgrade3Count}`; */
 }
 
 
 //
 
-
+for(let i:number = 0; i < availableItems.length; i++){
+    availableItems[i].button.addEventListener("click", ()=> {
+        buyUpgrade(availableItems[i]);
+    });
+}
 
 
 requestAnimationFrame(frameUpdate);
@@ -196,5 +216,5 @@ requestAnimationFrame(frameUpdate);
 app.append(header);
 app.append(button);
 app.append(divider);
-createButtons(upgrades);
+createButtons(availableItems);
 app.append(countDisplay);
