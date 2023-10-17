@@ -100,7 +100,7 @@ function createButtons(availableItems: things[]) {
       app.append(availableItems[i].button);
     }
 }
-
+///narrative
 function buyUpgrade(purchase: things){
 
     count = count - purchase.cost;
