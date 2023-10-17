@@ -87,6 +87,24 @@ const availableItems: things[] = [
         description:"get a castle to do wizard stuff",
     },
 
+    {
+        name:"🦇",
+        cost: 10000,
+        amountOwned: 0,
+        growthRate: 100,
+        button: document.createElement("button"),
+        description:"get a vampire to help conduct skele summons",
+    },
+
+    {
+        name:"😇",
+        cost: 100000,
+        amountOwned: 0,
+        growthRate: 500,
+        button: document.createElement("button"),
+        description:"angel to help resurrect more dead",
+    },
+
 
 
 ]
