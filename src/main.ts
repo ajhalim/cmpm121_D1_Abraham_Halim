@@ -1,9 +1,5 @@
 import "./style.css";
 
-let upgrade1Count: number = 0;
-let upgrade2Count: number = 0;
-let upgrade3Count: number = 0;
-
 //let upgrade1Cost: number = 10;
 //let upgrade2Cost: number = 100;
 //let upgrade3Cost: number = 1000;
