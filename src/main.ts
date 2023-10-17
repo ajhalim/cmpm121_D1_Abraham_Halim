@@ -58,6 +58,7 @@ interface things{
     description: string;
 }
 
+//Whoops done sooner
 const availableItems: things[] = [
     {
         name:"🧙",
@@ -115,7 +116,6 @@ function buyUpgrade(purchase: things){
     <br>${purchase.description}`;
 
     
-
 
     countDisplay.innerText = `You have summoned ${count.toFixed()} skeletons and have a growth rate of ${growthRate.toFixed(2)}`;
 }
