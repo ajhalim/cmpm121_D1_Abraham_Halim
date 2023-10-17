@@ -109,6 +109,13 @@ function buyUpgrade(purchase: things){
 
     growthRate += purchase.growthRate;
 
+    purchase.cost = purchase.cost * 1.15;
+    
+    purchase.button.innerHTML = `${purchase.name}<br>Skele summons: ${purchase.growthRate} : Cost: ${purchase.cost.toFixed()}
+    <br>${purchase.description}`;
+
+    
+
 
     countDisplay.innerText = `You have summoned ${count.toFixed()} skeletons and have a growth rate of ${growthRate.toFixed(2)}`;
 }
